@@ -30,6 +30,32 @@ python src/data/download.py
 
 Или вручную: https://www.kaggle.com/datasets/mrdaniilak/russia-real-estate-2021
 
+## Data Pipeline
+
+В проекте реализован ETL-пайплайн для подготовки данных к моделированию:
+
+```bash
+python src/data/pipeline.py data/raw/all_v2.csv
+```
+
+Пайплайн:
+- загружает и нормализует raw CSV;
+- валидирует входные данные через Data Contract;
+- очищает данные и повторно валидирует cleaned layer;
+- строит offline-признаки;
+- выполняет region-aware sampling;
+- сохраняет `clean`, `features`, `train`, `val`, `test` артефакты в `data/processed/`.
+
+Основные модули:
+- `src/data/pipeline.py`
+- `src/data/features.py`
+- `src/data/clean.py`
+- `src/data/contract.py`
+
+Документация Checkpoint 2:
+- `docs/checkpoint2_report.md`
+- `docs/feature_registry.md`
+
 ## Структура проекта
 
 ```
@@ -44,6 +70,6 @@ real-estate-price-explorer/
 ## Чекпоинты
 
 - [x] Чекпоинт 1: Постановка задачи и первичное проектирование
-- [ ] Чекпоинт 2: Data Engineering и пайплайн данных
+- [x] Чекпоинт 2: Data Engineering и пайплайн данных
 - [ ] Чекпоинт 3: Моделирование и эксперименты
 - [ ] Чекпоинт 4: Деплой, мониторинг и эксплуатация
